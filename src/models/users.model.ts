@@ -34,7 +34,7 @@ export class User extends Model<User, UserCreationAttrs> {
   @ApiProperty({ example: 'Tor', description: ' user login' })
   @Column({
     type: DataType.STRING,
-    unique: false,
+    unique: true,
     allowNull: false,
   })
   login: string;
@@ -43,7 +43,7 @@ export class User extends Model<User, UserCreationAttrs> {
   @ApiProperty({ example: 'examp.new@gmail.com', description: 'Unique email' })
   @Column({
     type: DataType.STRING,
-    unique: true,
+    unique: false,
     allowNull: false,
   })
   email: string;

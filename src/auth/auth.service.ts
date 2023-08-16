@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from 'src/dtos/create-user.dto';
 import { UsersService } from 'src/services/users.service';
@@ -16,7 +16,7 @@ export class AuthService {
 		const candidate = await this.userService.getUserByLogin(userDto.login);
 		if(candidate){
 			throw new HttpException(
-				'User with this email already exists',
+				'User with this login already exists',
 				HttpStatus.BAD_REQUEST,
 			);
 		}
@@ -28,6 +28,16 @@ export class AuthService {
 		return this.generateToken(user);
 	}
 
+
+	async login(userDto: CreateUserDto) {
+		console.log('Hello', userDto.login)
+		const users = await this.userService.getUserByLogin(userDto.login);
+		console.log('Hello', users)
+		const user = await this.validateUser(userDto);
+		return this.generateToken(user);
+	}
+
+
 	private async generateToken(user: User){
 		const payload = { 
 			id: user.id, 
@@ -38,5 +48,22 @@ export class AuthService {
 		return {
 			token: this.jwtService.sign(payload)
 		}
+	}
+
+
+
+	private async validateUser(userDto: CreateUserDto){
+		const user = await this.userService.getUserByLogin(userDto.login);
+			if(!user){
+			throw new HttpException(
+				'Incorrect login',
+				HttpStatus.UNAUTHORIZED,
+			);
+		}
+		const passEquals = await compare(userDto.password, user.password);
+		if(user && passEquals){
+			return user
+		}
+			throw new UnauthorizedException({message: 'Incorrect password!'});
 	}
 }
