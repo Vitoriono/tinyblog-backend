@@ -4,6 +4,8 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
 import { User } from './models/users.model';
 import { ServicesModule } from './services/services.module';
+import { Posts } from './models/posts.model';
+import { PostsModule } from './posts/posts.module';
 
 @Module({
   imports: [
@@ -17,10 +19,11 @@ import { ServicesModule } from './services/services.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User],
+      models: [User, Posts],
       autoLoadModels: true,
     }),
     AuthModule,
+    PostsModule,
   ],
   controllers: [],
   providers: [],

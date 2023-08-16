@@ -30,11 +30,9 @@ export class AuthService {
 
 
 	async login(userDto: CreateUserDto) {
-		console.log('Hello', userDto.login)
-		const users = await this.userService.getUserByLogin(userDto.login);
-		console.log('Hello', users)
 		const user = await this.validateUser(userDto);
 		return this.generateToken(user);
+		
 	}
 
 
@@ -43,13 +41,14 @@ export class AuthService {
 			id: user.id, 
 			name: user.name, 
 			login: user.login, 
-			email: user.email
+			email: user.email,
+			date: user.createdAt
 		};
 		return {
-			token: this.jwtService.sign(payload)
+			token: this.jwtService.sign(payload),
+			payload: payload
 		}
 	}
-
 
 
 	private async validateUser(userDto: CreateUserDto){
