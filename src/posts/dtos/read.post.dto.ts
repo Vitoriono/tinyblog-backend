@@ -4,7 +4,5 @@ export class ReadPostDto {
   readonly title: string;
   readonly photo: string;
   readonly text: string;
-  readonly author: number;
-  readonly createdAt: number;
-  readonly updatedAt: number;
+  readonly author: string;
 }

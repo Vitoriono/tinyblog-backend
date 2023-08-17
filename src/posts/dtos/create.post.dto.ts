@@ -3,5 +3,5 @@ export class CreatePostDto {
   readonly title: string;
   readonly photo: string;
   readonly text: string;
-  readonly author: number;
+  readonly author: string;
 }

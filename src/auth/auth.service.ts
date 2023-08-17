@@ -44,7 +44,6 @@ export class AuthService {
       name: user.name,
       login: user.login,
       email: user.email,
-      date: user.createdAt,
     };
     return {
       token: this.jwtService.sign(payload),

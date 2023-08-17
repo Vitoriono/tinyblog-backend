@@ -6,7 +6,7 @@ interface PostsCreationAttrs {
   title: string;
   photo: string;
   text: string;
-  author: number;
+  author: string;
 }
 
 @Table({ tableName: 'post' })
