@@ -20,4 +20,9 @@ export class PostsService {
 		const allPosts = await this.postRepository.findAll()
 		return allPosts;
 	}
+
+	async getById(id: number){
+		const onePost = await this.postRepository.findByPk(id);
+		return onePost;
+	}
 }

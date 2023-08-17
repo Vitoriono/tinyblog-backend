@@ -1,5 +1,4 @@
-import { Body, Controller, Get, Query} from '@nestjs/common';
-import { CreatePostDto } from 'src/dtos/create-post.dto';
+import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 import { PostsService } from './posts.service';
 
 @Controller({ path: 'account' })
@@ -9,5 +8,10 @@ export class PostsReaderController {
 	@Get()
 	findAll(){
 		return this.postService.findAll();
+	}
+
+	@Get(':id')
+	getByIdPost(@Param('id', new ParseIntPipe()) id: number){
+		return this.postService.getById(id);
 	}
 }

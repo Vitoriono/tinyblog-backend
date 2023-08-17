@@ -2,12 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   Column,
   DataType,
-  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
-import { Posts } from './posts.model';
-
 
 interface UserCreationAttrs {
   login: string;
@@ -56,8 +53,4 @@ export class User extends Model<User, UserCreationAttrs> {
     allowNull: false,
   })
   password: string;
-
-  @HasMany(() => Posts)
-  posts: Posts[];
-
 }
