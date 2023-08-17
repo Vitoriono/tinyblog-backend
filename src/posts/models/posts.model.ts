@@ -1,17 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  Column,
-  DataType,
-  Model,
-  Table,
-} from 'sequelize-typescript';
+import { Column, DataType, Model, Table } from 'sequelize-typescript';
 
 interface PostsCreationAttrs {
   category: string;
   title: string;
   photo: string;
   text: string;
-  userId: number;
+  author: number;
 }
 
 @Table({ tableName: 'post' })
@@ -24,34 +19,30 @@ export class Posts extends Model<Posts, PostsCreationAttrs> {
   })
   id: number;
 
-
   @Column({
-	type: DataType.STRING,
-	unique: false,
-	allowNull: false,
+    type: DataType.STRING,
+    unique: false,
+    allowNull: false,
   })
   category: string;
 
-
- @Column({
+  @Column({
     type: DataType.STRING,
     unique: true,
     allowNull: false,
   })
   title: string;
 
-
   @Column({ type: DataType.TEXT })
   photo: string;
-
 
   @Column({ type: DataType.TEXT, allowNull: false })
   text: string;
 
   @Column({
-    type: DataType.STRING, 
-    unique: true, 
-    allowNull:  false
+    type: DataType.STRING,
+    unique: true,
+    allowNull: false,
   })
   author: string;
 }

@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { CreateUserDto } from 'src/dtos/create-user.dto';
-import { User } from 'src/models/users.model';
-
+import { CreateUserDto } from 'src/auth/dtos/create.user.dto';
+import { User } from 'src/auth/models/users.model';
 
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectModel(User) private readonly userRepository: typeof User) {}
+    @InjectModel(User) private readonly userRepository: typeof User,
+  ) {}
 
   async createUser(dto: CreateUserDto) {
     const user = await this.userRepository.create(dto);
-   	return user;
+    return user;
   }
 
   async getUserByLogin(login: string) {
@@ -21,5 +21,4 @@ export class UsersService {
     });
     return user;
   }
-
-}  
+}

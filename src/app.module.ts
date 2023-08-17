@@ -2,15 +2,14 @@ import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-import { User } from './models/users.model';
-import { ServicesModule } from './services/services.module';
-import { Posts } from './models/posts.model';
+import { User } from './auth/models/users.model';
+import { Posts } from './posts/models/posts.model';
 import { PostsModule } from './posts/posts.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath:'.env'
+      envFilePath: '.env',
     }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
