@@ -45,11 +45,11 @@ export class Posts extends Model<Posts, PostsCreationAttrs> {
   title: string;
 
 
-  @Column({ type: DataType.STRING })
+  @Column({ type: DataType.TEXT })
   photo: string;
 
 
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({ type: DataType.TEXT, allowNull: false })
   text: string;
 
   @ForeignKey(() => User)

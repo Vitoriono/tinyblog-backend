@@ -11,9 +11,13 @@ export class PostsService {
 		private readonly fileService: FilesService
 	){}
 
-	async create(dto: CreatePostDto, photo: any){
-		const fileName = await this.fileService.createFile(photo);
-		const post = await this.postRepository.create({...dto, photo: fileName});
-		return post; 
+	async create(dto: CreatePostDto){
+		const post = await this.postRepository.create(dto);
+		return post;
+	}
+
+	async findAll(){
+		const allPosts = await this.postRepository.findAll()
+		return allPosts;
 	}
 }
