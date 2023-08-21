@@ -41,7 +41,6 @@ export class Posts extends Model<Posts, PostsCreationAttrs> {
 
   @Column({
     type: DataType.STRING,
-    unique: true,
     allowNull: false,
   })
   author: string;
